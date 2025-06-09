@@ -74,6 +74,42 @@ class Tests(unittest.TestCase):
             False,
         )
 
+    def test_maze_create_cells__visited_true(self):
+        num_cols = 12
+        num_rows = 10
+        m1 = Maze(0, 0, num_rows, num_cols, 10, 10)
+        m1._Maze__break_walls_r(0,0) # type: ignore
+        self.assertEqual(
+            m1._Maze__cells[0][0].visited, # type: ignore
+            True,
+        )
+        self.assertEqual(
+            m1._Maze__cells[-int(num_cols/2)][-int(num_rows/2)].visited, # type: ignore
+            True,
+        )
+        self.assertEqual(
+            m1._Maze__cells[-1][-1].visited, # type: ignore
+            True,
+        )
+
+    def test_maze_create_cells__visited_reset(self):
+        num_cols = 12
+        num_rows = 10
+        m1 = Maze(0, 0, num_rows, num_cols, 10, 10)
+        m1._Maze__break_walls_r(0,0) # type: ignore
+        m1._Maze__reset_cells_visited() # type: ignore
+        self.assertEqual(
+            m1._Maze__cells[0][0].visited, # type: ignore
+            False,
+        )
+        self.assertEqual(
+            m1._Maze__cells[-int(num_cols/2)][-int(num_rows/2)].visited, # type: ignore
+            False,
+        )
+        self.assertEqual(
+            m1._Maze__cells[-1][-1].visited, # type: ignore
+            False,
+        )
 
 if __name__ == "__main__":
         unittest.main()
