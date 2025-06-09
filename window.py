@@ -44,7 +44,7 @@ class Line:
         )
 
 class Cell:
-    def __init__(self, window):
+    def __init__(self, window=None):
         self.has_left_wall = True
         self.has_right_wall = True 
         self.has_top_wall = True   
@@ -63,24 +63,30 @@ class Cell:
 
         if self.has_left_wall:
             left_wall = Line(Point(self.__x1, self.__y1), Point(self.__x1, self.__y2))
-            self.__win.draw_line(left_wall)
+            if self.__win:
+                self.__win.draw_line(left_wall)
 
         if self.has_right_wall:
             right_wall = Line(Point(self.__x2, self.__y1), Point(self.__x2, self.__y2))
-            self.__win.draw_line(right_wall)
+            if self.__win:
+                self.__win.draw_line(right_wall)
         
         if self.has_top_wall:
             top_wall = Line(Point(self.__x1, self.__y1), Point(self.__x2, self.__y1))
-            self.__win.draw_line(top_wall)
+            if self.__win:
+                self.__win.draw_line(top_wall)
 
         if self.has_bottom_wall:
             bottom_wall = Line(Point(self.__x1, self.__y2), Point(self.__x2, self.__y2))
-            self.__win.draw_line(bottom_wall)
+            if self.__win:
+                self.__win.draw_line(bottom_wall)
 
     def draw_move(self, to_cell, undo=False):
         line = Line(Point(self.__x1 + ((self.__x2 - self.__x1) / 2), self.__y1 + ((self.__y2 - self.__y1) / 2)),
                      Point(to_cell.__x1 + ((to_cell.__x2 - to_cell.__x1) / 2), to_cell.__y1 + ((to_cell.__y2 - to_cell.__y1) / 2)))
         if not undo:
-            self.__win.draw_line(line, "red")
-            return
-        self.__win.draw_line(line, "gray")
+            if self.__win:
+                self.__win.draw_line(line, "red")
+                return
+        if self.__win:
+            self.__win.draw_line(line, "gray")
