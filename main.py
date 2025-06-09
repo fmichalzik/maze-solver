@@ -19,6 +19,7 @@ def main():
     test_cell_c.draw_move(test_cell_b) """
 
     test_maze = Maze(100, 50, 20, 30, 40, 40, win)
+    test_maze._Maze__break_entrance_and_exit() # type: ignore
 
     win.wait_for_close()
 main()
